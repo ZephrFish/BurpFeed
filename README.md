@@ -25,4 +25,10 @@ When you've got all of this setup you can refer to usage.
 python bfeed.py targets.txt
 ```
 
+To igrnore warnings you can supress them with this:
+
+```
+python -W ignore bfeed.py targets.txt
+```
+
 This will probably throw errors but alas it's a hacky tool 😉
