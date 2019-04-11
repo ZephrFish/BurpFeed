@@ -1,6 +1,8 @@
 # BurpFeeder
 A tool for passing and adding a list of URLs to Burp's sitemap/target tab, really useful for populating the targets tab with a big list of URLs. Originally an idea that [@InfoSecPS](https://twitter.com/InfoSecPS) and I threw together, then I tweaked and hacked together this chaos!
 
+This tool comes in two flavours; the standard version, which is non-threaded and the threaded version which has threading built in!
+
 ## Setup
 To set this up, you'll need the following:
 - Burp Suite
