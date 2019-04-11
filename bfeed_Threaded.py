@@ -1,5 +1,5 @@
 #!/env/python
-# Burp URL Feeder 0.3
+# Burp URL Feeder Threaded
 # ZephrFish 2019
 # Python2.7 based added in threading and some other jazz
 import urllib3
