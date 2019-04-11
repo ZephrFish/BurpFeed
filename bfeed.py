@@ -1,5 +1,5 @@
 #!/env/python
-# Burp URL Feeder
+# Burp URL Feeder Non-Threaded
 # ZephrFish 2018
 import urllib3
 import sys
