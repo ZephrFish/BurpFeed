@@ -1,6 +1,6 @@
 #!/env/python
 # Burp URL Feeder Non-Threaded
-# ZephrFish 2019
+# ZephrFish & Mantis re-write 2019
 import urllib3
 import sys
 import re
