@@ -1,4 +1,6 @@
-# BurpFeeder
+# BurpFeed
+![](https://github.com/ZephrFish/BurpFeed/blob/master/LogoBurpFeed.png)
+
 A tool for passing and adding a list of URLs to Burp's sitemap/target tab, really useful for populating the targets tab with a big list of URLs. Originally an idea that [@InfoSecPS](https://twitter.com/InfoSecPS) and I threw together, then I tweaked and hacked together this chaos!
 
 ## Setup
