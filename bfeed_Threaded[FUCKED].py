@@ -2,6 +2,7 @@
 # Burp URL Feeder Threaded
 # ZephrFish 2019
 # Python2.7 based added in threading and some other jazz
+# DO NOT USE
 import urllib3
 import sys
 import re
