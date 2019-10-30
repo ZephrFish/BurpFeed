@@ -8,12 +8,13 @@ import sys
 import re
 import requests
 import argparse
-import urllib3
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from multiprocessing import Pool
 
 urllib3.exceptions.InsecureRequestWarning
 
 def fetchUrl(url):
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         proxy = {
                 "http": "http://localhost:8080",
                 "https": "https://localhost:8080",
@@ -22,7 +23,7 @@ def fetchUrl(url):
         if re.match(regex, url):
                 try:
                         normalresponse = requests.get(url.rstrip(), proxies=proxy, verify=False, timeout=8)
-                        print(url, normalresponse.status_code)
+                        print("URL: {0} | Status: {1}".format(url.rstrip(), normalresponse.status_code))
                 except: 
                         pass
         else:
@@ -31,7 +32,9 @@ def fetchUrl(url):
                 try:
                         httpsresponse = requests.get(HTTPSecure, proxies=proxy, verify=False, timeout=8)
                         httpresponse = requests.get(HTTPNot, proxies=proxy, verify=False, timeout=8)
-                        print(url.rstrip(), httpsresponse.status_code, httpresponse.status_code)
+                        print("URL: {0} | Status: {1}".format(HTTPNot, httpresponse.status_code))
+                        print("URL: {0} | Status: {1}".format(HTTPSecure, httpsresponse.status_code))
+
                 except:
                         pass
 
@@ -42,5 +45,4 @@ def burpFeed(urls, threads):
                 print(results)
                                 
 if __name__ == '__main__':
-    urllib3.disable_warnings()
     burpFeed(sys.argv[1], sys.argv[2])
