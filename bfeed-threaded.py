@@ -8,6 +8,7 @@ import sys
 import re
 import requests
 import argparse
+import urllib3
 from multiprocessing import Pool
 
 urllib3.exceptions.InsecureRequestWarning
@@ -36,8 +37,10 @@ def fetchUrl(url):
 
 def burpFeed(urls, threads):
         pool = Pool(int(threads))
-        with open(urls) as source_file:
+        with open(urls, encoding="utf8") as source_file:
                 results = pool.map(fetchUrl, source_file, int(threads))
+                print(results)
                                 
 if __name__ == '__main__':
+    urllib3.disable_warnings()
     burpFeed(sys.argv[1], sys.argv[2])
