@@ -16,11 +16,20 @@ import (
 
 var debugMode bool
 var proxyUrl string
+
+type ProgArgs struct {
+	proxyUrl    string
+	debugMode   bool
+	threads     int
+	httpTimeout int
+}
+
 var wg sync.WaitGroup
+var args ProgArgs
 
 func makeRequest(u string) {
 
-	proxyUrl, err := url.Parse(proxyUrl)
+	proxyUrl, err := url.Parse(args.proxyUrl)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -28,8 +37,8 @@ func makeRequest(u string) {
 	client := &http.Client{
 		Transport: &http.Transport{
 			Dial: (&net.Dialer{
-				Timeout:   15 * time.Second,
-				KeepAlive: 15 * time.Second,
+				Timeout:   time.Duration(args.httpTimeout) * time.Second,
+				KeepAlive: time.Duration(args.httpTimeout) * time.Second,
 			}).Dial,
 			TLSHandshakeTimeout:   10 * time.Second,
 			ResponseHeaderTimeout: 10 * time.Second,
@@ -45,42 +54,38 @@ func makeRequest(u string) {
 		if debugMode {
 			fmt.Println(resp)
 		}
+
+		fmt.Println(u)
 	}
 }
 
-func processJob(c chan string) {
+func processJob(c <-chan string) {
 	for {
-		select {
-		case url := <-c:
-			fmt.Println(url)
-			wg.Add(1)
-			go func() {
-				defer wg.Done()
-				makeRequest(url)
-			}()
-		}
+		url := <-c
+		makeRequest(url)
 	}
 }
 
 func main() {
 
-	c := make(chan string, 1000)
-	defer close(c)
+	jobs := make(chan string, 1000)
+	defer close(jobs)
 
 	var filename string
-	var threads int
+
 	flag.StringVar(&filename, "filename", "", "./path/to/urls.txt")
-	flag.BoolVar(&debugMode, "debug", false, "Turn on debug mode")
-	flag.IntVar(&threads, "threads", 10, "Number of concurrent jobs to run")
-	flag.StringVar(&proxyUrl, "proxy", "http://127.0.0.1:8080", "The HTTP proxy you want to feed it through")
+	flag.BoolVar(&args.debugMode, "debug", false, "Turn on debug mode")
+	flag.IntVar(&args.threads, "threads", 10, "Number of concurrent jobs to run")
+	flag.IntVar(&args.httpTimeout, "timeout", 10, "HTTP Timeout time in seconds")
+	flag.StringVar(&args.proxyUrl, "proxy", "http://127.0.0.1:8080", "The HTTP proxy you want to feed it through")
 	flag.Parse()
 
 	// Jobs queue
-	for j := 0; j < threads; j++ {
+	for j := 0; j < args.threads; j++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			processJob(c)
+			processJob(jobs)
 		}()
 	}
 
@@ -95,7 +100,7 @@ func main() {
 	for fileScanner.Scan() {
 		text := fileScanner.Text()
 		if strings.Trim(text, "\r\n\t ") != "" {
-			c <- fileScanner.Text()
+			jobs <- fileScanner.Text()
 		}
 	}
 
