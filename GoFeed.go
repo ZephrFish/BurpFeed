@@ -20,8 +20,6 @@ var wg sync.WaitGroup
 
 func makeRequest(u string) {
 
-	defer wg.Done()
-
 	proxyUrl, err := url.Parse(proxyUrl)
 	if err != nil {
 		log.Panic(err)
