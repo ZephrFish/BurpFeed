@@ -3,6 +3,9 @@
 
 A tool for passing and adding a list of URLs to Burp's sitemap/target tab, really useful for populating the targets tab with a big list of URLs. Originally an idea that [@InfoSecPS](https://twitter.com/InfoSecPS) and I threw together, then I tweaked and hacked together this chaos!
 
+## GoBurpFeed
+There is also a version of BurpFeed written in go by Mantis https://github.com/ZephrFish/BurpFeed/tree/GoRewrite check it out!
+
 ## Setup
 To set this up, you'll need the following:
 - Burp Suite
