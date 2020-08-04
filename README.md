@@ -1,4 +1,4 @@
-# BurpFeed - Go Edition!
+# BurpFeed - Go Edition! Still a WIP
 ![](https://github.com/ZephrFish/BurpFeed/blob/master/LogoBurpFeed.png)
 ![](https://raw.githubusercontent.com/egonelbre/gophers/ac77b513f41f44a7805694063aaef16ccd95a9b3/vector/projects/network.svg)
 
