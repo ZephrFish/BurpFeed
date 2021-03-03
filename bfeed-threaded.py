@@ -1,8 +1,7 @@
-#!/env/python
+#!/env/python3
 # Burp URL Feeder Threaded
-# ZephrFish 2019
-# Modified by Mantis 2019
-# Python2.7 based added in threading and some other jazz
+# ZephrFish & Mantis 2021
+# Python 3 Conversion
 import urllib3
 import sys
 import re
@@ -45,4 +44,9 @@ def burpFeed(urls, threads):
                 print(results)
                                 
 if __name__ == '__main__':
-    burpFeed(sys.argv[1], sys.argv[2])
+    try:
+        burpFeed(sys.argv[1], sys.argv[2])
+    except:
+        print("Not enough arguments! %s <hosts file> <number of threads>" % sys.argv[0])
+        sys.exit()
+    
