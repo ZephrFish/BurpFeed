@@ -1,13 +1,14 @@
 #!/env/python
 # Burp URL Feeder Non-Threaded
-# ZephrFish & Mantis re-write 2019
+# Python 3 conversion
+# ZephrFish 2.0 2021
 import urllib3
 import sys
 import re
 import requests
 import argparse
 
-# urllib3.exceptions.InsecureRequestWarning
+urllib3.exceptions.InsecureRequestWarning
 
 
 def burpFeed(urls):
@@ -23,7 +24,7 @@ def burpFeed(urls):
                         if re.match(regex, url):
                                 try:
                                         normalresponse = requests.get(url.rstrip(), proxies=proxy, verify=False, timeout=8)
-                                        print(url, normalresponse.status_code)
+                                        print((url, normalresponse.status_code))
                                 except: 
                                         pass
                         else:
@@ -38,4 +39,9 @@ def burpFeed(urls):
 
 
 if __name__ == '__main__':
-    burpFeed(sys.argv[1])
+        try:
+                burpFeed(sys.argv[1])
+        except:
+                print("File argument needed! %s <hosts file>" % sys.argv[0])
+                sys.exit()
+    
