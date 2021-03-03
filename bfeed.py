@@ -1,6 +1,5 @@
 #!/env/python
 # Burp URL Feeder Non-Threaded
-# Python 3 conversion
 # ZephrFish 2.0 2021
 import urllib3
 import sys
@@ -24,7 +23,7 @@ def burpFeed(urls):
                         if re.match(regex, url):
                                 try:
                                         normalresponse = requests.get(url.rstrip(), proxies=proxy, verify=False, timeout=8)
-                                        print((url, normalresponse.status_code))
+                                        print(url, normalresponse.status_code)
                                 except: 
                                         pass
                         else:
