@@ -60,16 +60,14 @@ func makeRequest(u string) {
 }
 
 func processJob(c <-chan string) {
-	for {
-		url := <-c
-		makeRequest(url)
+	for in := range c {
+		makeRequest(in)
 	}
 }
 
 func main() {
 
 	jobs := make(chan string, 1000)
-	defer close(jobs)
 
 	var filename string
 
@@ -103,6 +101,8 @@ func main() {
 			jobs <- fileScanner.Text()
 		}
 	}
+
+	close(jobs)
 
 	wg.Wait()
 }
