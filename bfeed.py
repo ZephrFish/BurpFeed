@@ -1,6 +1,6 @@
 #!/env/python
 # Burp URL Feeder Non-Threaded
-# ZephrFish 2.0 2021
+# ZephrFish 2.1 2021
 import urllib3
 import sys
 import re
@@ -16,6 +16,8 @@ def burpFeed(urls):
                 "http": "http://127.0.0.1:8080",
                 "https": "https://127.0.0.1:8080",
         }
+
+        headers = sys.argv[2]
 
         with open(urls.rstrip(), 'r') as f:
                 for url in f:
