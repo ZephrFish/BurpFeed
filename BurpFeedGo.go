@@ -71,7 +71,11 @@ func main() {
 
 	var filename string
 
+	// To include headers in requests
+	var headersFile string
+
 	flag.StringVar(&filename, "filename", "", "./path/to/urls.txt")
+	flag.StringVar(&headersFile, "headersFile", "", "./path/to/headers.txt")
 	flag.BoolVar(&args.debugMode, "debug", false, "Turn on debug mode")
 	flag.IntVar(&args.threads, "threads", 10, "Number of concurrent jobs to run")
 	flag.IntVar(&args.httpTimeout, "timeout", 10, "HTTP Timeout time in seconds")
