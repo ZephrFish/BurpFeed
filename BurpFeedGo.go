@@ -55,7 +55,7 @@ func makeRequest(u string) {
 			fmt.Println(resp)
 		}
 
-		fmt.Println(u)
+		fmt.Println("Sent:", u)
 	}
 }
 
@@ -102,7 +102,12 @@ func main() {
 	for fileScanner.Scan() {
 		text := fileScanner.Text()
 		if strings.Trim(text, "\r\n\t ") != "" {
-			jobs <- fileScanner.Text()
+			if !strings.HasPrefix(text, "http") {
+				jobs <- "https://" + text
+				jobs <- "http://" + text
+			} else {
+				jobs <- text
+			}
 		}
 	}
 
