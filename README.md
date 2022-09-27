@@ -44,6 +44,15 @@ This will probably throw errors but alas it's a hacky tool 😉
 A tool for passing and adding a list of URLs to Burp's sitemap/target tab, really useful for populating the targets tab with a big list of URLs. 
 
 ### GoBurpFeed Setup
+
+#### Install
+
+```
+go install github.com/ZephrFish/BurpFeed@latest
+```
+
+
+#### Manual Setup
 To set this up, you'll need the following:
 - Burp Suite
 - Go 
