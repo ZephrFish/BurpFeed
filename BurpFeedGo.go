@@ -16,6 +16,7 @@ import (
 
 var debugMode bool
 var proxyUrl string
+var headers []string
 
 type ProgArgs struct {
 	proxyUrl    string
@@ -48,8 +49,21 @@ func makeRequest(u string) {
 	}
 
 	dest, err := url.Parse(u)
+
 	if err == nil {
-		resp, _ := client.Get(dest.String())
+
+		req, err := http.NewRequest("GET", dest.String(), nil)
+
+		if err != nil {
+			log.Panic(err)
+		}
+
+		for _, header := range headers {
+			headerSplit := strings.Split(header, ":")
+			req.Header.Add(headerSplit[0], headerSplit[1])
+		}
+
+		resp, err := client.Do(req)
 
 		if debugMode {
 			fmt.Println(resp)
@@ -89,6 +103,26 @@ func main() {
 			defer wg.Done()
 			processJob(jobs)
 		}()
+	}
+
+	// Read the headers file
+	if headersFile != "" {
+		file, err := os.Open(headersFile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer file.Close()
+
+		// Add the lines to the headers array
+		scanner := bufio.NewScanner(file)
+
+		for scanner.Scan() {
+			headers = append(headers, scanner.Text())
+		}
+
+		if err := scanner.Err(); err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	readFile, err := os.Open(filename)
