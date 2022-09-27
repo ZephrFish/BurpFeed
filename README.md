@@ -7,7 +7,6 @@ The tool is written in both Python and Go, GoBurpFeed was written by [Mantis](ht
 
 GoBurpFeed will be the only supported version from now on as the python version has been migrated to a legacy state.
 
-## GoBurpFeed
 ![](https://raw.githubusercontent.com/egonelbre/gophers/ac77b513f41f44a7805694063aaef16ccd95a9b3/vector/projects/network.svg)
 
 A tool for passing and adding a list of URLs to Burp's sitemap/target tab, really useful for populating the targets tab with a big list of URLs. 
