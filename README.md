@@ -56,7 +56,6 @@ go install github.com/ZephrFish/BurpFeed@latest
 To set this up, you'll need the following:
 - Burp Suite
 - Go 
-  - Only tested on go1.14.2
   
 Chuck your target URLs or IPs in a file, can be named whatever but must have http/https prefixed at the start of line for this to work.
 
