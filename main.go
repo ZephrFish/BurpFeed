@@ -134,7 +134,6 @@ func main() {
 	if args.sleep > 0 {
 
 		// Create a random number to sleep by
-
 		randSleep := time.Duration(args.sleep + rand.Intn(args.jitter))
 		sleep = time.Duration(time.Millisecond * time.Duration(randSleep))
 		fmt.Println("Sleeping for", sleep, "milliseconds per request")
