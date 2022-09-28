@@ -63,6 +63,9 @@ func makeRequest(u string) {
 			log.Panic(err)
 		}
 
+		// Comment out if you want to use a custom user agent
+		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36")
+
 		for _, header := range headers {
 			headerSplit := strings.Split(header, ":")
 			req.Header.Add(headerSplit[0], headerSplit[1])
