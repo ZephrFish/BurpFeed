@@ -48,7 +48,7 @@ func makeRequest(u string) {
 
 	proxyURL, err := url.Parse(args.proxyURL)
 	if err != nil {
-		log.Panic(err)
+		log.Println(err)
 	}
 
 	client := &http.Client{
@@ -74,7 +74,7 @@ func makeRequest(u string) {
 		req, err := http.NewRequest("GET", dest.String(), nil)
 
 		if err != nil {
-			log.Panic(err)
+			log.Println(err)
 		}
 
 		req.Header.Set("User-Agent", args.userAgent)
@@ -86,7 +86,7 @@ func makeRequest(u string) {
 
 		resp, err := client.Do(req)
 		if err != nil {
-			log.Panic(err)
+			log.Println(err)
 		}
 
 		if args.debugMode {
@@ -150,7 +150,7 @@ func main() {
 	if headersFile != "" {
 		file, err := os.Open(headersFile)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		defer file.Close()
 
@@ -162,7 +162,7 @@ func main() {
 		}
 
 		if err := scanner.Err(); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}
 
@@ -172,7 +172,7 @@ func main() {
 			var err error
 			args.userAgent, err = getRandomUserAgent()
 			if err != nil {
-				log.Panic(err)
+				log.Println(err)
 			}
 		}
 	}
@@ -180,7 +180,7 @@ func main() {
 	// Read the URLs
 	readFile, err := os.Open(urlsFile)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	fileScanner := bufio.NewScanner(readFile)
