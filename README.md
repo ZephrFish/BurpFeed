@@ -49,6 +49,15 @@ Usage of BurpFeed:
   Number of concurrent jobs to run (default 10) 
 ```
 
+### Headers File
+
+The headers file should split by new-lines and in the `HeaderName: HeaderValue` format.
+
+This can be used to set custom headers, cookies, etc. For example:
+```
+Cookie: authCookie=VGVzdHZhbHVl;
+Authorization: Bearer VGVzdHZhbHVl
+```
 
 
 
